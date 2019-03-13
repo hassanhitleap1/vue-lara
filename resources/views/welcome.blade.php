@@ -9,38 +9,17 @@
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+       
     </head>
     <body>
       
         <div id="root">
             <ul>
-                <li v-for="skill in skills" V-text="skill"></li>
+            <li v-for="skill in skills" >@{{skill}}</li>
             </ul>
         </div>
-        <script>
-                new Vue({
-                    el:'#app',
-                    data:{
-                        skills:[],  
-                    }
-                    mounted() {
-                       skills:function(){
-                        axios.get('/skills')
-                            .then(function (response) {
-                                this.skills=response.data;
-                                console.log(response);
-                            })
-                            .catch(function (error) {
-                                // handle error
-                                console.log(error);
-                            })
-                            .then(function () {
-                                // always executed
-                            });
-                       } 
-                    },
 
-                })
-        </script>
+        <script src="{{asset('js/main.js')}}"></script>
     </body>
 </html>
