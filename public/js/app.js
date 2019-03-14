@@ -1,7 +1,6 @@
-import { format } from "util";
+//import { format } from "util";
 
-class Erorrs
-{
+class Erorrs{
 
 
   constructor(){
@@ -10,7 +9,7 @@ class Erorrs
 
 
 
-  get(fieled){
+  get(fieled){ 
     if(this.errors[fieled]){
       return this.errors[fieled][0];
     }
@@ -18,6 +17,7 @@ class Erorrs
 
 
   record(errors){
+    console.log(errors);
     this.errors=errors
   }
 
@@ -25,7 +25,6 @@ class Erorrs
     if(fieled) delete this.errors[fieled];
     this.errors={};
   }
-
 
 
   has(fieled){
@@ -66,8 +65,6 @@ class Form{
   }
 
 
-
-
   submit(requastType,url){
     axios[requastType]('/projects',this.data())
     .then(this.onSuccess.bind(this))
@@ -80,8 +77,8 @@ class Form{
   }
 
 
-  onFail(){
-    this.form.error.record(error.response.data)
+  onFail(error){
+      this.errors.record(error.response.data)
   }
 
 
@@ -90,7 +87,7 @@ class Form{
 
 
 
- new Vue({
+app= new Vue({
      el:'#app',
      data:{
         projects:{},
@@ -107,22 +104,17 @@ class Form{
      methods: {
         onSubmit(){
           this.form.submit('post','/projects');
-            // axios.post('/projects',this.$data)
-            //   .then(this.onSuccess)
-            //   .catch(function (error) {
-            //       this.form.error.record(error.response.data)
-            //     console.log(error.response.data);
-            //   });
         },
         onSuccess(response){
           form.rest();
         },
         init(){
-            axios.get('/projects')
-              .then(function (response) {
-                  this.projects=response.data;
-              }).catch(error => this.errors=error.response.data);
+          axios.get('/projects').then(response => this.projects=response.data )
+          .catch(error => this.errors=error.response.data);
         }
-     },
+     }
 
  });
+
+
+ 

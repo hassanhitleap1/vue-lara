@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container"  id="app">
+<div class="container" >
     <div>
         <ul>
           <li v-for="project in projects" v-text="project.name"></li>
