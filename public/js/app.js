@@ -22,7 +22,11 @@ class Erorrs{
   }
 
   clear(fieled){
-    if(fieled) delete this.errors[fieled];
+    if(fieled)
+      {
+        delete this.errors[fieled];
+        return;
+      }
     this.errors={};
   }
 
@@ -50,35 +54,67 @@ class Form{
 
 
   rest(){
-    for(let field in originalData){
+    for(let field in this.originalData){
       this[field]='';
     }
-  }
 
 
-  data(){
-   let data=  Object.assign({},this);
-
-   delete data.errors;
-   delete data.originalData;
-   return data;
-  }
-
-
-  submit(requastType,url){
-    axios[requastType]('/projects',this.data())
-    .then(this.onSuccess.bind(this))
-    .catch(this.onFail.bind(this));
-  }
-
-
-  onSuccess(){
     this.errors.clear();
   }
 
 
-  onFail(error){
-      this.errors.record(error.response.data)
+  data(){
+    let data={};
+    for(let property in this.originalData){
+      data[property]=this[property];
+      // this do loop 
+      // data.name =this.name; 
+      // data.description= this.description;
+    }
+  //  let data=  Object.assign({},this);
+
+  //  delete data.errors;
+  //  delete data.originalData;
+  //  return data;
+  }
+
+
+  post (url){
+    return this.submit('post',url);
+  }
+
+
+  delete(url){
+    return this.submit('delete',url);
+  }
+
+  submit(requastType,url){
+
+    return new Promise((resolve,reject)=>{
+        axios[requastType](url,this.data())
+          .then(response=>{
+            this.onSuccess(response.data);
+            resolve(response.data)
+          })
+          .catch(error=>{
+            //this.onFail.bind(this)
+            this.onFail(error.response.data)
+
+            reject(error.response.data)
+          });
+    });
+ 
+  }
+
+
+  onSuccess(data){
+    alert(data,message)
+    this.rest();
+  }
+
+
+  onFail(errors){
+      this.errors.record(errors)
   }
 
 
@@ -103,11 +139,16 @@ app= new Vue({
      },
      methods: {
         onSubmit(){
-          this.form.submit('post','/projects');
+          this.form.submit('post','/projects')
+            .then(data=>console.log(data))
+            .catch(error=>console.log(error));
+
+
+
         },
-        onSuccess(response){
-          form.rest();
-        },
+        // onSuccess(response){
+        //   form.rest();
+        // },
         init(){
           axios.get('/projects').then(response => this.projects=response.data )
           .catch(error => this.errors=error.response.data);

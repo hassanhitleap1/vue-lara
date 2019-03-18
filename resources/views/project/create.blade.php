@@ -19,7 +19,7 @@
                     <div class="alert alert-danger" role="alert" v-text="form.errors.get('description')" v-if="form.errors.has('description')">
                       </div>
                   </div>
-                  <button type="submit" class="btn btn-primary" :disabled="form.errors.any()">Submit</button>
+                  <button type="submit" class="btn btn-primary " :disabled="form.errors.any()">Submit</button>
           </form>
   </div>
 </div>
