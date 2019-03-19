@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <input type="text" name="text1" id="text1"  />
+        <p >the text one is {{text1}}</p> <br />
+        <input type="text" name="text2" id="text2" v-model="text2"  />
+        <p >the text two is {{text2}}</p> <br />
+    </div>
+
+    <script>
+        let data={
+            text1:"ddddddd"
+        }
+        document.querySelector("p").textContent=data.text1;
+        new Vue({
+            el:"#app",
+            data:{
+                text2:"qqqqqqqqqqqqqqqq"
+            }
+        })
+    </script>
+  
+</body>
+</html>
