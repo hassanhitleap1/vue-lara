@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <div>
+            <ul>
+                <li v-for="name in names" >{{name}}</li>
+            </ul>
+            <ul >
+                    <li v-for="(item, index) in items">
+                      {{ parentMessage }} - {{ index }} - {{ item.message }}
+                    </li>
+                  </ul>
+                
+            <li v-for="name in names"> {{ name }}</li>
+             <input type="text" name="newname" id="newname">  
+             <button id="addnewname" >addnewname</button>   
+        </div>  
+    </div>
+
+    <script>
+        var app=new Vue({
+                el: '#app',
+                data: {
+                    parentMessage: 'Parent',
+                    items: [
+                    { message: 'Foo' },
+                    { message: 'Bar' }
+                    ],
+                    names:["ahemsd","ssssss","sssssad"]
+                }
+                })
+
+           document.querySelector("#addnewname").addEventListener("click", function(){ 
+            var name =document.getElementById("newname").value;
+            app.names.push(name);
+            document.getElementById("newname").value='';
+
+
+           });     
+
+    </script>
+     <script src="vue.min.js"></script>
+</body>
+</html>
