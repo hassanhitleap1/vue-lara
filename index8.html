@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <task-list></task-list>
+    </div>
+    <script>
+        Vue.component('task-list', {
+            template:`
+            
+                    <div>
+                        <task v-for="task in tasks"  v-text="task.name"></task>
+                    </div>
+            `,
+            data() {
+                return {
+                    tasks:[
+                        {id:1,name:"do",comple:true},
+                        {id:2,name:"do s",comple:true},
+                        {id:3,name:"do 3",comple:true},
+                        {id:4,name:"do 5",comple:true},
+                        {id:5,name:"do 6",comple:true},
+                    ]
+                }
+            },
+        })
+        Vue.component('task',{
+            template:"<li><slot></slot></li>"
+        })
+        new Vue({
+            el:"#app",  
+        });
+    </script>
+</body>
+</html>
