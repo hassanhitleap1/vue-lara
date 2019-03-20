@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.css">
+    <script src="vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+      <model v-if="isVisable" @clos="isVisable=false"></model>
+      <button  @click="showModel"> show model</button>
+      
+
+    </div>
+    <script>
+
+        Vue.component('model', {
+            template:
+            `<div class="modal is-active ">
+                <div class="modal-background"></div>
+                <div class="modal-content">
+                    <div class="box">
+                        model show
+                    </div>
+                </div>
+                <button class="modal-close is-large" v-on:click="$emit('clos')" aria-label="close"></button>
+            </div>`
+        });
+
+
+
+        new Vue({
+            el:"#app", 
+            data:{
+                isVisable:false,
+          
+            },
+            methods: {
+                showModel(){
+                    this.isVisable=true
+                }
+            },
+           
+        });
+    </script>
+</body>
+</html>
