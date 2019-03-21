@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.css"
+    />
+    <script src="vue.min.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <copoun @applied="onCopounApplied"></copoun>
+      <h1 v-show="copounApplied">  the copoun was applied</h1>
+    </div>
+    <script>
+     window.Event = new class{
+         constructor(){
+             this.vue=new Vue();
+         }
+
+         fire(event,data=null){
+             this.vue.$emit(event,data);
+         }
+
+         listen(event ,callback){
+             this.vue.$on(event,callback);
+         }
+     };
+      Vue.component("copoun", {
+        template: `<input placeholder="pleas enter your copoun here" @blur="onCopounApplied"/>`,
+        methods: {
+            onCopounApplied(){
+                Event.fire('applied');
+            } 
+        },
+      });
+      new Vue({
+        el: "#app",
+        data:{
+            copounApplied:false
+        },
+        methods: {
+          onCopounApplied() {
+              this.copounApplied=true;
+          }
+        },created() {
+          Event.listen('applied',()=> alert('s'))
+        },
+      });
+    </script>
+  </body>
+</html>
