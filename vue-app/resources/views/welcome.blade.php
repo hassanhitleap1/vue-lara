@@ -24,18 +24,10 @@
                     skilles:[]
                 },mounted(){
                     axios.get('/skilles')
-                    // .then(function (response) {
-                    //     this.skilles= response.data
-                    //    console.log(this.skilles) ;
-                        
-                    // })
-                    .then(response=>( this.skilles= response.data))
+                    .then(response=>this.skilles= response.data)
                     .catch(function (error) {
                         // handle error
                         console.log(error);
-                    })
-                    .then(function () {
-                        // always executed
                     });
                 }
             })
