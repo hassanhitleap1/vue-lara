@@ -19,3 +19,7 @@ Route::get('/', function () {
 Route::get('/skilles', function () {
     return ['open','close','delete','like'];
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
